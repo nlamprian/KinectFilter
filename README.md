@@ -30,7 +30,11 @@ Compilation
 You can use the following to compile the code and run the exported application.
 
 ```bash
-g++ -std=c++0x -I/usr/local/include/libusb-1.0 -I/usr/local/include/libfreenect -I/opt/AMDAPP/include `pkg-config --cflags opencv` kinectFilter.cpp -L/opt/AMDAPP/lib/x86_64 -lOpenCL -lGL -lglut -lfreenect `pkg-config --libs opencv` -o kinectFilter
+# cd into the project's folder
+mkdir build
+cd build
+cmake ..
+make
 ./kinectFilter
 ```
 
