@@ -103,13 +103,7 @@ public:
         // Get the list of platforms
         cl::Platform::get (&platforms);
 
-        // Get the GPU devices in the first platform
-        platforms[0].getDevices (CL_DEVICE_TYPE_GPU, &devices);
-
-        // Detect OpenCL-OpenGL Interoperability
-        checkCLGLInterop (devices[0]);
-
-        // Create a context with CL-GL interop for the first device
+        // Set context properties (OS specific)
         #if defined(_WIN32)
         cl_context_properties props[] = 
         {
@@ -135,9 +129,23 @@ public:
             0 
         };
         #endif
-        // cl_device_id device;
-        // clGetGLContextInfoKHR (props, CL_CURRENT_DEVICE_FOR_GL_CONTEXT_KHR, sizeof (cl_device_id), &device, NULL);
-        // devices.emplace_back (device);
+
+        #if defined(__APPLE__) || defined(__MACOSX)
+        // Get the GPU devices in the first platform
+        platforms[0].getDevices (CL_DEVICE_TYPE_GPU, &devices);
+        #else
+        // Get the CL device associated with the GL context
+        cl_device_id device;
+        clGetGLContextInfoKHR_fn clGetGLContextInfo = (clGetGLContextInfoKHR_fn) 
+            clGetExtensionFunctionAddressForPlatform ((platforms[0]) (), "clGetGLContextInfoKHR");
+        clGetGLContextInfo (props, CL_CURRENT_DEVICE_FOR_GL_CONTEXT_KHR, sizeof (cl_device_id), &device, NULL);
+        devices.emplace_back (device);
+        #endif
+
+        // Detect OpenCL-OpenGL Interoperability
+        checkCLGLInterop (devices[0]);
+
+        // Create a context with CL-GL interop
         context = cl::Context (devices[0], props);
 
         // Create OpenGL memory objects
@@ -189,8 +197,7 @@ public:
             std::cerr << error.what () << " ("
                       << error.err ()  << ")"  << std::endl;
             
-            std::string log;
-            program.getBuildInfo (devices[0], CL_PROGRAM_BUILD_LOG, &log);
+            std::string log = program.getBuildInfo<CL_PROGRAM_BUILD_LOG> (devices[0]);
             std::cout << log << std::endl;
 
             exit (EXIT_FAILURE);
@@ -273,8 +280,7 @@ public:
 private:
     void checkCLGLInterop (cl::Device &device)
     {
-        std::string exts;
-        device.getInfo(CL_DEVICE_EXTENSIONS, &exts);
+        std::string exts = device.getInfo<CL_DEVICE_EXTENSIONS> ();
 
         #if defined(__APPLE__) || defined(__MACOSX)
         std::string glShare("cl_apple_gl_sharing");
@@ -533,7 +539,7 @@ void initGLObjects ()
 
 
 // Displays the available controls 
-void printInfo()
+void printInfo ()
 {
     std::cout << "\nAvailable Controls:\n";
     std::cout << "===================\n";
