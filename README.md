@@ -3,11 +3,13 @@ KinectFilter
 
 This project brings together the following libraries: `libfreenect`, `OpenCV`, `OpenGL`, `OpenCL`.
 
+<img src="http://i76.photobucket.com/albums/j16/paign10/snapshot_zps0b51dlju.jpg" alt="snapshot" width="500">
+
 `KinectFilter` offers a number of applications that use a Kinect sensor as a camera, process the data stream from Kinect on the GPU with OpenCL, and display the processed stream in a graphical window.
 
-There are 3 examples in which a Laplacian of Gaussian (LoG) filter is applied on the RGB stream, and another one in which a 3D point cloud is built while performing RGB normalizaton. The applications are interactive, so you can examine the effects of the filters on the incoming streams. You can find a demonstration of how the application from version 1.0 is performing on [YouTube](https://www.youtube.com/watch?v=jnuAnIt9vFY).
+![data-flow](http://i76.photobucket.com/albums/j16/paign10/kinect-filter_zpsi8z3fpn8.png)
 
-![snapshot](http://i76.photobucket.com/albums/j16/paign10/snapshot_zps0b51dlju.jpg)
+There are 3 examples in which a Laplacian of Gaussian (LoG) filter is applied on the RGB stream, and another one in which a 3D point cloud is built while performing RGB normalizaton. The applications are interactive, so you can examine the effects of the filters on the incoming streams. You can find a demonstration of how the application from version 1.0 is performing on [YouTube](https://www.youtube.com/watch?v=jnuAnIt9vFY).
 
 The Laplacian filter is an edge detection operator that works on both the `x` and `y` image axes. The Gaussian filter is a simple smoothing operator which unfortunately smooths also the edges. In the demo applications, you will be able to examine the effects of the Gaussian filter on the edge detection process in real-time and get a better understanding of the matter. For a more superior, edge-preserving, smoothing operator, take a look at the [Bilateral](http://en.wikipedia.org/wiki/Bilateral_filter) and the [Guided Image](http://research.microsoft.com/en-us/um/people/kahe/eccv10/) filters.
 
