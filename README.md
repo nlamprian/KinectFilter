@@ -3,18 +3,18 @@ KinectFilter
 
 This project brings together the following libraries: `libfreenect`, `OpenCV`, `OpenGL`, `OpenCL`.
 
-<img src="http://i76.photobucket.com/albums/j16/paign10/snapshot_zps0b51dlju.jpg" alt="snapshot" width="500">
+<img src="https://github.com/nlamprian/KinectFilter/wiki/assets/snapshot.jpg" alt="snapshot" width="500">
 
 `KinectFilter` offers a number of applications that use a Kinect sensor as a camera, process the data stream from Kinect on the GPU with OpenCL, and display the processed stream in a graphical window.
 
-![data-flow](http://i76.photobucket.com/albums/j16/paign10/kinect-filter_zpsi8z3fpn8.png)
+![data flow](https://github.com/nlamprian/KinectFilter/wiki/assets/kinect-filter.png)
 
 There are 3 examples in which a Laplacian of Gaussian (LoG) filter is applied on the RGB stream, and another one in which a 3D point cloud is built while performing RGB normalizaton. The applications are interactive, so you can examine the effects of the filters on the incoming streams. You can find a demonstration of how the application from version 1.0 is performing on [YouTube](https://www.youtube.com/watch?v=jnuAnIt9vFY).
 
 The Laplacian filter is an edge detection operator that works on both the `x` and `y` image axes. The Gaussian filter is a simple smoothing operator which unfortunately smooths also the edges. In the demo applications, you will be able to examine the effects of the Gaussian filter on the edge detection process in real-time and get a better understanding of the matter. For a more superior, edge-preserving, smoothing operator, take a look at the [Bilateral](http://en.wikipedia.org/wiki/Bilateral_filter) and the [Guided Image](http://research.microsoft.com/en-us/um/people/kahe/eccv10/) filters.
 
 Note
-====
+----
 
 The code was tested on Ubuntu 12.04/14.04, on a system with an AMD GPU.
 
@@ -25,7 +25,7 @@ The code was tested on Ubuntu 12.04/14.04, on a system with an AMD GPU.
 * Included 2 examples on the OpenCL-OpenGL interoperability (based on the OpenCL C++ API)
 
 Dependencies
-============
+------------
 
 In order to compile the code, you'll need to have installed the following libraries: `OpenGL`, `GLUT`, `GLEW`, `OpenCV`, `OpenCL`, `libusb` and `libfreenect`. I've prepared a script to do this for you.
 
@@ -36,12 +36,12 @@ rm -r 113ae06addaa96444693
 ```
 
 Compilation
-===========
+-----------
 
 You can use the following to compile the code and run the exported applications.
 
 ```bash
-git clone https://github.com/pAIgn10/KinectFilter.git
+git clone https://github.com/nlamprian/KinectFilter.git
 cd KinectFilter
 mkdir build
 cd build
@@ -54,6 +54,6 @@ make
 ```
 
 Attribution
-===========
+-----------
 
 Version 1.0 of this project was based on the `cppview` example of libfreenect's C++ Wrapper API.

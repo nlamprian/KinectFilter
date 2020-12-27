@@ -1,13 +1,13 @@
 /**
  * Name: KinectFilter
- * Author: Nick Lamprianidis { paign10.ln (at) gmail (dot) com }
+ * Author: Nick Lamprianidis <nlamprian@gmail.com>
  * Version: 2.0
  * Description: This project brings together the following libraries: 
  *              libfreenect, OpenCV, OpenGL, OpenCL. There is a number of 
  *              applications that use a Kinect sensor as a camera, process the 
  *              data stream from Kinect on the GPU with OpenCL, and display the 
  *              processed stream in a graphical window.
- * Source: https://github.com/pAIgn10/KinectFilter
+ * Source: https://github.com/nlamprian/KinectFilter
  * License: Copyright (c) 2014-2015 Nick Lamprianidis
  *          This code is licensed under the GPL v2 license
  * Attribution: This application was based on the "cppview" example of the
